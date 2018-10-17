@@ -1,41 +1,69 @@
 <?php
 
-add_action('wp_ajax_my_action', 'my_action');
-add_action('wp_ajax_nopriv_my_action', 'my_action');
+add_action('wp_ajax_dynamic_location', 'dynamic_location');
+add_action('wp_ajax_nopriv_dynamic_location', 'dynamic_location');
 
-function my_action ()
+function dynamic_location ()
 {
-    echo "ul";
-    $i = 1;
-    $a = get_term_children(252, 'location');
-    foreach ($a as $loc) {
-        echo $i;
-        $term = get_term_by( 'id', $loc, 'location' );
-        echo '<li><a href="">' . $term->name . '</a></li>';
-        $i++;
+    $term_id = $_POST['term_id'];
+    $a = get_term_children($term_id, 'location');
 
+    foreach ($a as $loc) {
+        $term = get_term_by('id', $loc, 'location');
+
+        $location_arr[$term->term_id] = $term->name;
+        //echo '<option value="' . $term->term_id . '">' . $term->name . '</option>';
     }
-    echo "</ul>";
+    asort($location_arr);
+    if (count($location_arr) > 0) {
+        foreach ($location_arr as $id => $location) {
+            echo '<option value="' . $id . '">' . $location . '</option>';
+        }
+    } else {
+        echo 0;
+    }
+
     die;
 
 }
 
+add_action('wp_footer', 'dynamic_location_javascript'); // Write our JS below here
 
-/*add_action( 'wp_footer', 'my_action_javascript' ); // Write our JS below here
+function dynamic_location_javascript ()
+{ ?>
+    <script type="text/javascript">
+        (function ($) {
 
-function my_action_javascript() { */?><!--
-    <script type="text/javascript" >
-        jQuery(document).ready(function($) {
+            $("select[name=ss-location]").on('change', function () {
 
-            var data = {
-                'action': 'my_action',
-                'whatever': 1234
-            };
+                var s_location =  $("select[name=s-location]");
+                s_location.attr('disabled', 'disabled');
+                s_location.empty();
 
-            // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-            jQuery.post(ajaxurl, data, function(response) {
-                alert('Got this from the server: ' + response);
+                var term_id = $(this).val();
+                var data = {
+                    term_id: term_id,
+                    action: 'dynamic_location'
+                };
+                $.post('<?php echo admin_url('admin-ajax.php')?>', data, function (result) {
+
+                    if (result === '0') {
+
+                        $("select[name=s-location]").append('<option value="">Няма Райони</option>');
+                        s_location.removeAttr('disabled', 'disabled');
+
+                        return false;
+
+                    } else {
+                        s_location.append(result);
+                        s_location.removeAttr('disabled', 'disabled');
+
+                    }
+                });
+
             });
-        });
-    </script> --><?php
-/*}*/
+
+        })(jQuery)
+
+    </script> <?php
+}

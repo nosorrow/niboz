@@ -1,0 +1,1 @@
+1. /hometown-theme/custom/theme-functions.php:307 - 315 line ->add new location filter
