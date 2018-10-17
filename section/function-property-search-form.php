@@ -42,17 +42,17 @@ function property_search_form ($search_layout, $widget = false)
         <input type="hidden" name="property-search" value="true"/>
         <div class="row">
 
-            <?php if ($search_layout != 'compact' && !$widget): ?>
+            <?php /*if ($search_layout != 'compact' && !$widget): */?><!--
                 <div class="columns large-2 medium-4 search-id">
-                    <label><?php _e('Property ID', 'theme_front'); ?></label>
-                    <input type="text" name="property-id" placeholder="<?php _e('Any', 'theme_front'); ?>"
-                           value="<?php echo esc_attr(nt_get_request('property-id')); ?>" autofocus tabindex="1"/>
+                    <label><?php /*_e('Property ID', 'theme_front'); */?></label>
+                    <input type="text" name="property-id" placeholder="<?php /*_e('Any', 'theme_front'); */?>"
+                           value="<?php /*echo esc_attr(nt_get_request('property-id')); */?>" autofocus tabindex="1"/>
                 </div>
-            <?php endif; ?>
+            --><?php /*endif; */?>
 
             <?php // @todo Plamen make change ss-location;
             ?>
-            <div class="columns large-4 medium-4 search-location">
+            <div class="columns large-3 medium-3 search-location">
                 <label><?php _e('City', 'theme_front'); ?></label>
                 <select class="select2" name="ss-location" tabindex="2">
                     <option value=""><?php _e('Any', 'theme_front'); ?></option>
@@ -83,7 +83,7 @@ function property_search_form ($search_layout, $widget = false)
                 </select>
             </div>
 
-            <div class="columns large-4 medium-4 search-location">
+            <div class="columns large-3 medium-3 search-location">
                 <label><?php _e('Property Location', 'theme_front'); ?></label>
                 <select class="select2" name="s-location" tabindex="2">
                     <option value=""><?php _e('Any', 'theme_front'); ?></option>
