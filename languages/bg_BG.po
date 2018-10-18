@@ -1,0 +1,550 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Hometown\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-23 05:46+0000\n"
+"PO-Revision-Date: 2018-10-18 08:15+0000\n"
+"Last-Translator: dev <ivailogeorgiev86@gmail.com>\n"
+"Language-Team: Български\n"
+"Language: bg_BG\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: search.php:31 single.php:39 index.php:38
+msgid "No Comments"
+msgstr "Няма коментари"
+
+#: search.php:31 single.php:39 index.php:38
+msgid "1 Comment"
+msgstr "1 коментар"
+
+#: search.php:31 single.php:39 index.php:38
+msgid "% Comments"
+msgstr "% коменра"
+
+#: footer.php:69 404.php:10 searchform.php:2 section/section-search.php:5
+msgid "Search &#8230;"
+msgstr "Търси &#8230;"
+
+#: comments.php:6
+#, php-format
+msgid "One Response"
+msgid_plural "%1$s Responses"
+msgstr[0] "Един Отговор"
+msgstr[1] "%1$s Отговори"
+
+#: comments.php:18
+msgid "Comment Page:"
+msgstr "Коментари:"
+
+#: comments.php:33
+msgid "Name"
+msgstr "Име"
+
+#: comments.php:35
+msgid "Email"
+msgstr "E-mail"
+
+#: comments.php:37 section/section-member-edit-profile.php:43
+msgid "Website"
+msgstr "Уеб сайт"
+
+#: comments.php:45
+msgid "Message *"
+msgstr "Съобщение*"
+
+#: comments.php:72
+msgid "Your comment is awaiting moderation."
+msgstr "Вашият коментар очаква одобрение от модератор."
+
+#: comments.php:82
+msgid "Edit"
+msgstr "Редактирай"
+
+#: single-property.php:29
+msgid "Inquiry Property"
+msgstr "Запитване за имот"
+
+#: single-property.php:46
+msgid "Your message has been sent."
+msgstr "Вашето съобщение беше изпратено"
+
+#: single-property.php:48
+msgid "There are something wrong."
+msgstr "Възникна грешка."
+
+#: single.php:48
+msgid "Pages:"
+msgstr "Страници"
+
+#: template-member.php:30
+msgid "Dashboard"
+msgstr "Табло"
+
+#: template-member.php:31
+msgid "Submit Properties"
+msgstr "Публикувай имот"
+
+#: template-member.php:32 section/section-member-edit-profile.php:17
+msgid "Edit Profile"
+msgstr "Редактирай профил"
+
+#: template-member.php:33
+msgid "Logout"
+msgstr "Изход"
+
+#: 404.php:11
+msgid "Search"
+msgstr "Търси"
+
+#: single-agent.php:21
+msgid "Assigned Properties"
+msgstr "Свързани имоти"
+
+#: custom/theme-functions.php:61
+msgid "This post is password protected. Please fill the password:"
+msgstr "Този коментар е защитен с парола. Моля, въведете парола:"
+
+#: custom/theme-functions.php:63 section/section-login-register.php:13
+msgid "Password"
+msgstr "Парола"
+
+#: custom/theme-functions.php:64 vc-template/vc_newsletter.php:6
+msgid "Submit"
+msgstr "Изпрати"
+
+#: custom/theme-ajax.php:38
+msgid "has been subscribed."
+msgstr "Бяхте абониран."
+
+#: section/section-member-dashboard.php:27
+#, php-format
+msgid ""
+"<p>Your profile is empty. Please edit your profile <a href=\"%s\">here</a>."
+"</p>"
+msgstr ""
+"<p>Вашият профил е празен. Моля, редактирайте Вашия профил <a href=\"%s\">от "
+"тук</a>.</p>"
+
+#: section/section-member-dashboard.php:33
+msgid "My Properties"
+msgstr "Моите имоти"
+
+#: section/section-member-dashboard.php:38
+#: section/section-member-dashboard.php:110
+msgid "Property"
+msgstr "Имот"
+
+#: section/section-member-dashboard.php:39
+#: section/section-member-add-property.php:175
+msgid "Status"
+msgstr "Статус"
+
+#: section/section-member-dashboard.php:40
+#: section/section-member-dashboard.php:111
+msgid "Manage"
+msgstr "Редакция"
+
+#: section/section-member-dashboard.php:87
+#: section/section-member-dashboard.php:95 section/section-nav.php:17
+msgid "Next Page &rarr;"
+msgstr "Следваща страница &rarr;"
+
+#: section/section-member-dashboard.php:87
+#: section/section-member-dashboard.php:96 section/section-nav.php:17
+msgid "&larr; Previous Page"
+msgstr "&larr; Предишна страница"
+
+#: section/section-member-dashboard.php:105
+msgid "Favourite Properties"
+msgstr "Любими имоти"
+
+#: section/section-related-property.php:26
+msgid "Related Properties"
+msgstr "Подобни имоти"
+
+#: section/section-member-edit-profile.php:23
+#: section/section-login-register.php:9 section/section-login-register.php:30
+msgid "Username"
+msgstr "Потребителско име"
+
+#: section/section-member-edit-profile.php:27
+#: section/function-single-property.php:275 vc-template/vc_newsletter.php:5
+msgid "Email Address"
+msgstr "E-mail адрес"
+
+#: section/section-member-edit-profile.php:31
+msgid "Profile Image"
+msgstr "Профилна снимка"
+
+#: section/section-member-edit-profile.php:32
+msgid "Your profile image is managed with Gravatar, please manage it"
+msgstr "Вашата профилна снимка е от Gravatar, моля редактирайте я"
+
+#: section/section-member-edit-profile.php:32
+msgid "here"
+msgstr "тук"
+
+#: section/section-member-edit-profile.php:35
+msgid "Display Name"
+msgstr "Име"
+
+#: section/section-member-edit-profile.php:39
+#: section/function-single-property.php:276
+msgid "Phone Number"
+msgstr "Телефонен номер"
+
+#: section/section-member-edit-profile.php:47
+#: section/section-member-add-property.php:150
+msgid "Description"
+msgstr "Описание"
+
+#: section/section-member-edit-profile.php:50
+msgid "Update Profile"
+msgstr "Обнови профила"
+
+#: section/function-property-search-form.php:48
+#: section/section-member-add-property.php:146
+msgid "Property ID"
+msgstr "Номер на оферта"
+
+#: section/function-property-search-form.php:49
+#: section/function-property-search-form.php:56
+#: section/function-property-search-form.php:76
+#: section/function-property-search-form.php:93
+#: section/function-property-search-form.php:116
+#: section/function-property-search-form.php:132
+#: section/section-member-add-property.php:158
+#: section/section-member-add-property.php:177
+#: section/section-member-add-property.php:196
+msgid "Any"
+msgstr "Всички"
+
+#: section/function-property-search-form.php:54
+msgid "Property Location"
+msgstr "Район"
+
+#: section/function-property-search-form.php:74
+msgid "Property Status"
+msgstr "Вид"
+
+#: section/function-property-search-form.php:91
+msgid "Property Type"
+msgstr "Тип"
+
+#: section/function-property-search-form.php:114
+msgid "Min Beds"
+msgstr "Минимум спални"
+
+#: section/function-property-search-form.php:130
+msgid "Min Baths"
+msgstr "Минимум бани"
+
+#: section/function-property-search-form.php:165
+#: section/section-member-add-property.php:213
+msgid "Price"
+msgstr "Цена"
+
+#: section/function-property-search-form.php:193
+#: section/function-single-property.php:113
+#: section/section-member-add-property.php:225
+msgid "Area"
+msgstr "Квадратура"
+
+#: section/function-property-search-form.php:201
+#: section/function-property-search-form.php:202
+msgid "SEARCH"
+msgstr "ТЪРСИ"
+
+#: section/section-user-menu.php:17
+msgid "LOGOUT"
+msgstr "ИЗХОД"
+
+#: section/section-user-menu.php:19
+msgid "LOGIN / REGISTER"
+msgstr "ВХОД / РЕГИСТРАЦИЯ"
+
+#: section/section-login-register.php:5 section/section-login-register.php:61
+msgid "Login"
+msgstr "Вход"
+
+#: section/section-login-register.php:10 section/section-login-register.php:31
+msgid "Username is required."
+msgstr "Изисква се потребителско име."
+
+#: section/section-login-register.php:14
+msgid "Password is required."
+msgstr "Изисква се парола."
+
+#: section/section-login-register.php:18
+msgid "Log In"
+msgstr "Вход"
+
+#: section/section-login-register.php:25 section/section-login-register.php:40
+#: section/section-login-register.php:62
+msgid "Register"
+msgstr "Регистрация"
+
+#: section/section-login-register.php:35
+msgid "E-mail"
+msgstr "E-mail"
+
+#: section/section-login-register.php:36
+msgid "E-mail is required."
+msgstr "E-mail се изисква"
+
+#: section/section-login-register.php:36
+msgid "Invalid E-mail address."
+msgstr "Грешен e-mail адрес."
+
+#: section/section-login-register.php:46 section/section-login-register.php:63
+msgid "Forgot Password"
+msgstr "Забравена парола"
+
+#: section/section-login-register.php:50
+msgid "Username or E-mail"
+msgstr "Потребителско име или e-mail"
+
+#: section/section-login-register.php:51
+msgid "Username or E-mail is required."
+msgstr "Изисква се потребителско име или e-mail."
+
+#: section/section-login-register.php:55
+msgid "Reset Password"
+msgstr "Промени парола"
+
+#: section/section-property-sort.php:5
+msgid "Sort By"
+msgstr "Сортирай по"
+
+#: section/section-property-sort.php:6
+msgid "Price Low to High"
+msgstr "Най-ниска цена"
+
+#: section/section-property-sort.php:7
+msgid "Price High to Low"
+msgstr "Най-висока цена"
+
+#: section/section-property-sort.php:8
+msgid "Date New to Old"
+msgstr "Най-нови"
+
+#: section/section-property-sort.php:9
+msgid "Date Old to New"
+msgstr "Най-стари"
+
+#: section/section-property-sort.php:10
+msgid "Name Ascending"
+msgstr "Име (А &rarr; Я)"
+
+#: section/section-property-sort.php:11
+msgid "Name Descending"
+msgstr "Име (Я &rarr; А)"
+
+#: section/section-title.php:22
+msgid "Blog"
+msgstr "Блог"
+
+#: section/section-title.php:27
+msgid "<strong>404</strong> page not found"
+msgstr "<strong>Грешка 404:</strong> Страницата не е намерена"
+
+#: section/section-title.php:28
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. isn&rsquo;t it?"
+msgstr "Изглежда, че можем да намерим това, което търсите. Не е ли това?"
+
+#: section/section-title.php:33
+msgid "<strong>Search</strong> "
+msgstr "<strong>Търси</strong> "
+
+#: section/section-title.php:36
+msgid " results matched search query"
+msgstr "резултати съвпадащи с вашето търсене"
+
+#: section/section-title.php:38
+msgid "no results matched search query"
+msgstr "няма резултати съвпадащи с вашето търсене"
+
+#: section/section-title.php:44
+msgid "Attachment"
+msgstr "Прикачен файл"
+
+#: section/section-title.php:50
+#, php-format
+msgid "<em>Category</em> %s"
+msgstr "<em>Категория</em> %s"
+
+#: section/section-title.php:53
+#, php-format
+msgid "<em>Tag</em> %s"
+msgstr "<em>Етикет</em> %s"
+
+#: section/section-title.php:56
+#, php-format
+msgid "<em>Daily</em> %s"
+msgstr "<em>Дневно</em> %s"
+
+#: section/section-title.php:58
+#, php-format
+msgid "<em>Monthly</em> %s"
+msgstr "<em>Месечно</em> %s"
+
+#: section/section-title.php:60
+#, php-format
+msgid "<em>Yearly</em> %s"
+msgstr "<em>Годишно</em> %s"
+
+#: section/section-title.php:69
+#, php-format
+msgid "<em>Author</em> %s"
+msgstr "<em>Автор</em> %s"
+
+#: section/function-single-property.php:113
+msgid "ID"
+msgstr "Номер на оферта"
+
+#: section/function-single-property.php:113
+#: section/section-member-add-property.php:237
+msgid "Bedroom"
+msgid_plural "Bedrooms"
+msgstr[0] "Спалня"
+msgstr[1] "Спални"
+
+#: section/function-single-property.php:113
+#: section/section-member-add-property.php:231
+msgid "Bathroom"
+msgid_plural "Bathrooms"
+msgstr[0] "Баня"
+msgstr[1] "Бани"
+
+#: section/function-single-property.php:113
+#: section/section-member-add-property.php:243
+msgid "Garage"
+msgid_plural "Garages"
+msgstr[0] "Етаж"
+msgstr[1] "Етаж"
+
+#: section/function-single-property.php:124
+msgid "DETAILS"
+msgstr "ХАРАКТЕРИСТИКИ"
+
+#: section/function-single-property.php:126
+msgid "FEATURES"
+msgstr "ОСОБЕНОСТИ"
+
+#: section/function-single-property.php:128
+msgid "LOCATION"
+msgstr "РАЙОН"
+
+#: section/function-single-property.php:130
+msgid "CONTACT"
+msgstr "КОНТАКТ"
+
+#: section/function-single-property.php:146
+msgid "ATTACHMENTS"
+msgstr "ПРИКАЧЕНИ ФАЙЛОВЕ"
+
+#: section/function-single-property.php:158
+msgid "FLOOR PLANS"
+msgstr "РАЗПРЕДЕЛЕНИЕ"
+
+#: section/function-single-property.php:199
+msgid "View on Google Map"
+msgstr "Виж в Google Карти"
+
+#: section/function-single-property.php:277
+msgid "Message"
+msgstr "Съобщение"
+
+#: section/function-single-property.php:287
+msgid "Enter the words above"
+msgstr "Въведете думите по-горе"
+
+#: section/function-single-property.php:306
+msgid "SUBMIT"
+msgstr "ИЗПРАТИ"
+
+#: section/section-member-add-property.php:100
+msgid "Your property has been updated."
+msgstr "Вашият имот беше обновен."
+
+#: section/section-member-add-property.php:136
+msgid "Submit / Edit Property"
+msgstr "Публикувай / Редактирай имот"
+
+#: section/section-member-add-property.php:142
+msgid "Title"
+msgstr "Заглавие"
+
+#: section/section-member-add-property.php:156
+msgid "Type"
+msgstr "Тип"
+
+#: section/section-member-add-property.php:194
+#: section/section-member-add-property.php:294
+msgid "Location"
+msgstr "Район"
+
+#: section/section-member-add-property.php:219
+msgid "Price Per"
+msgstr "Цена за"
+
+#: section/section-member-add-property.php:219
+msgid "for example: month, year"
+msgstr "например: година, месец"
+
+#: section/section-member-add-property.php:250
+msgid "Features"
+msgstr "Особености"
+
+#: section/section-member-add-property.php:266
+msgid "Featured Image"
+msgstr "Главна снимка"
+
+#: section/section-member-add-property.php:278
+msgid "Gallery"
+msgstr "Галерия"
+
+#: section/section-member-add-property.php:318
+msgid "Submit Property"
+msgstr "Публикувай имот"
+
+#: section/section-member-add-property.php:320
+msgid "Update Property"
+msgstr "Обнови имот"
+
+#: custom/widget/property-compare.php:33
+msgid "Compare with"
+msgstr "Сравни с"
+
+#: framework/function/base-functions.php:66
+#, php-format
+msgid "Page %s"
+msgstr "Страница %s"
+
+#. Name of the theme
+msgid "Hometown"
+msgstr "НИБОЗ"
+
+#. Description of the theme
+msgid "Hometown - Real Estate WordPress Theme"
+msgstr "НИБОЗ - Агенция за недвижими имоти в Стара Загора"
+
+#. URI of the theme
+#. Author URI of the theme
+msgid "http://leafthemes.com"
+msgstr "https://nibozimoti.com"
+
+#. Author of the theme
+msgid "LeafThemes Studio"
+msgstr "НИБОЗ"
+
+msgid "City"
+msgstr "Град"
+
+msgid "Baths"
+msgstr "Бани"

@@ -53,7 +53,7 @@ function property_search_form ($search_layout, $widget = false)
             <?php // @todo Plamen make change ss-location;
             ?>
             <div class="columns large-3 medium-3 search-location">
-                <label><?php _e('City', 'theme_front'); ?></label>
+                <label><?php _e('City', 'theme_child'); ?></label>
                 <select class="select2" name="ss-location" tabindex="2">
                     <option value=""><?php _e('Any', 'theme_front'); ?></option>
                     <?php
@@ -148,7 +148,7 @@ function property_search_form ($search_layout, $widget = false)
 
             <?php if ($search_layout != 'compact' && !$widget): ?>
                 <div class="columns large-2 medium-4 small-6 search-bed">
-                    <label><?php _e('Min Beds', 'theme_front'); ?></label>
+                    <label><?php _e('Min Beds', 'theme_child'); ?></label>
                     <select class="select2" name="min-bed" data-minimum-results-for-search="Infinity" tabindex="5">
                         <option value=""><?php _e('Any', 'theme_front'); ?></option>
                         <?php
@@ -164,7 +164,7 @@ function property_search_form ($search_layout, $widget = false)
 
             <?php if ($search_layout != 'compact' && !$widget): ?>
                 <div class="columns large-2 medium-4 small-6 search-bath">
-                    <label><?php _e('Min Baths', 'theme_front'); ?></label>
+                    <label><?php _e('Baths', 'theme_child'); ?></label>
                     <select class="select2" name="min-bath" data-minimum-results-for-search="Infinity" tabindex="6">
                         <option value=""><?php _e('Any', 'theme_front'); ?></option>
                         <?php
