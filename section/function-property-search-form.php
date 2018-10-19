@@ -50,8 +50,7 @@ function property_search_form ($search_layout, $widget = false)
                 </div>
             --><?php /*endif; */?>
 
-            <?php // @todo Plamen make change ss-location;
-            ?>
+            <?php // @todo Plamen make change ss-location ?>
             <div class="columns large-3 medium-3 search-city">
                 <label><?php _e('City', 'theme_child'); ?></label>
                 <select class="select2" name="ss-location" tabindex="2">
@@ -164,19 +163,24 @@ function property_search_form ($search_layout, $widget = false)
             <?php endif; ?>
 
             <?php if ($search_layout != 'compact' && !$widget): ?>
-                <div class="columns large-2 medium-4 small-6 search-bath">
-                    <label><?php _e('Baths', 'theme_child'); ?></label>
+                <div class="columns large-2 medium-4 search-id">
+                    <label><?php _e('Property ID', 'theme_front'); ?></label>
+                    <input type="text" name="property-id" placeholder="<?php _e('Any', 'theme_front'); ?>"
+                           value="<?php echo esc_attr(nt_get_request('property-id')); ?>" autofocus tabindex="1"/>
+                </div>
+                <!--<div class="columns large-2 medium-4 small-6 search-bath">
+                    <label><?php /*_e('Baths', 'theme_child'); */?></label>
                     <select class="select2" name="min-bath" data-minimum-results-for-search="Infinity" tabindex="6">
-                        <option value=""><?php _e('Any', 'theme_front'); ?></option>
+                        <option value=""><?php /*_e('Any', 'theme_front'); */?></option>
                         <?php
-                        $meta = $meta_bathroom;
+/*                        $meta = $meta_bathroom;
                         $max = floor(max($meta));
                         for ($i = 1; $i <= $max; $i++):
-                            ?>
-                            <option value="<?php echo esc_attr($i); ?>" <?php if (nt_get_request('min-bath') == $i) echo 'selected="selected"'; ?>><?php echo $i; ?></option>
-                        <?php endfor; ?>
+                            */?>
+                            <option value="<?php /*echo esc_attr($i); */?>" <?php /*if (nt_get_request('min-bath') == $i) echo 'selected="selected"'; */?>><?php /*echo $i; */?></option>
+                        <?php /*endfor; */?>
                     </select>
-                </div>
+                </div>-->
             <?php endif; ?>
 
             <?php if ($search_layout != 'compact' && $meta_price): ?>
