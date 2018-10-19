@@ -26,25 +26,25 @@ function dynamic_location ()
     die;
 
 }
-
-add_action('wp_footer', 'dynamic_location_javascript'); // Write our JS below here
-
+// Set Ajax JS in Footer
 function dynamic_location_javascript ()
 { ?>
     <script type="text/javascript">
         (function ($) {
 
-            $("select[name=ss-location]").on('change', function () {
+            var selected = "<?php echo child_get_request('s-location')?>";
 
+            dynamicSelect("select[name=ss-location]");
+
+            function dynamicSelect(a) {
                 var text_any = "<?php _e("Any", 'theme_front');?>";
                 var s_location = $("select[name=s-location]");
                 var span_s_location = $("span[id^=select2-s-location-]");
                 span_s_location.text(text_any);
 
-                s_location.empty();
                 s_location.attr('disabled', 'disabled');
 
-                var term_id = $(this).val();
+                var term_id = $(a).val();
                 var data = {
                     term_id: term_id,
                     action: 'dynamic_location'
@@ -62,17 +62,29 @@ function dynamic_location_javascript ()
                         s_location.empty();
                         s_location.append('<option value="">' + text_any + '</option>');
                         s_location.append(result);
+                        if(selected){
+                            $("option[value=" + selected + "]").attr('selected', 'selected');
+                        }
                         s_location.removeAttr('disabled', 'disabled');
 
                     }
                 });
+            }
 
+
+            $("select[name=ss-location]").on('change', function () {
+
+                dynamicSelect(this);
             });
+
 
         })(jQuery)
 
     </script> <?php
 }
+add_action('wp_footer', 'dynamic_location_javascript');
+
+
 // Add City in bg_BG.po
 function setup_child_domain ()
 {
@@ -80,8 +92,9 @@ function setup_child_domain ()
 }
 add_action('after_setup_theme', 'setup_child_domain');
 
-/* This function extend and add new location filter (City)
-*  /hometown-theme/custom/theme-functions.php
+/*
+ * This function extend and add new location filter (City)
+ * /hometown-theme/custom/theme-functions.php
 */
 function nt_child_property_filter( $query ) {
 
@@ -103,3 +116,8 @@ function nt_child_property_filter( $query ) {
     }
 }
 add_action('pre_get_posts', 'nt_child_property_filter');
+
+// Get Request Parameter
+function child_get_request($key) {
+    return (isset($_REQUEST[$key]))?$_REQUEST[$key]:'';
+}
