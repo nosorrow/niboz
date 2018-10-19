@@ -52,7 +52,7 @@ function property_search_form ($search_layout, $widget = false)
 
             <?php // @todo Plamen make change ss-location;
             ?>
-            <div class="columns large-3 medium-3 search-location">
+            <div class="columns large-3 medium-3 search-city">
                 <label><?php _e('City', 'theme_child'); ?></label>
                 <select class="select2" name="ss-location" tabindex="2">
                     <option value=""><?php _e('Any', 'theme_front'); ?></option>

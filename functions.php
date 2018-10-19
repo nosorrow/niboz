@@ -32,15 +32,24 @@ function dynamic_location_javascript ()
     <script type="text/javascript">
         (function ($) {
 
-            var selected = "<?php echo child_get_request('s-location')?>";
+            function setSelected() {
+                // if have selected
+                if(selectedId){
+                    var selectedOpt = $("option[value=" + selectedId + "]");
+                    selectedOpt.attr('selected', 'selected');
+                    span_s_location.text(selectedOpt[0].text);
 
-            dynamicSelect("select[name=ss-location]");
+                } else {
+                    span_s_location.text(text_any);
+
+                }
+            }
 
             function dynamicSelect(a) {
+
                 var text_any = "<?php _e("Any", 'theme_front');?>";
                 var s_location = $("select[name=s-location]");
                 var span_s_location = $("span[id^=select2-s-location-]");
-                span_s_location.text(text_any);
 
                 s_location.attr('disabled', 'disabled');
 
@@ -49,26 +58,30 @@ function dynamic_location_javascript ()
                     term_id: term_id,
                     action: 'dynamic_location'
                 };
+
                 $.post('<?php echo admin_url('admin-ajax.php')?>', data, function (result) {
 
                     if (result === '0') {
                         s_location.empty();
                         $("select[name=s-location]").append('<option value="">Няма Райони</option>');
+                        span_s_location.text(text_any);
+
                         s_location.removeAttr('disabled', 'disabled');
 
                         return false;
 
                     } else {
+
                         s_location.empty();
                         s_location.append('<option value="">' + text_any + '</option>');
                         s_location.append(result);
-                        if(selected){
-                            $("option[value=" + selected + "]").attr('selected', 'selected');
-                        }
+
                         s_location.removeAttr('disabled', 'disabled');
 
                     }
+
                 });
+
             }
 
 
@@ -77,6 +90,11 @@ function dynamic_location_javascript ()
                 dynamicSelect(this);
             });
 
+            $(document).ready(function(){
+
+                dynamicSelect($("select[name=ss-location]"));
+
+            });
 
         })(jQuery)
 
