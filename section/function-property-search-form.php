@@ -62,7 +62,8 @@ function property_search_form ($search_layout, $widget = false)
                     nt_sort_terms_hierarchicaly($terms, $terms_sorted);
                     foreach ($terms_sorted as $term):
                         ?>
-                        <option value="<?php echo esc_attr($term->term_id); ?>" <?php if (nt_get_request('s-location') == $term->term_id) echo 'selected="selected"'; ?>><?php echo $term->name; ?></option>
+                        <option value="<?php echo esc_attr($term->term_id); ?>" <?php if (nt_get_request('ss-location') ==
+                            $term->term_id) echo 'selected="selected"'; ?>><?php echo $term->name; ?></option>
                         <?php /*foreach($term->children as $term_child): */
                         ?><!--
                 <option value="<?php /*echo esc_attr($term_child->term_id); */

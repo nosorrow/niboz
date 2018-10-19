@@ -36,9 +36,13 @@ function dynamic_location_javascript ()
 
             $("select[name=ss-location]").on('change', function () {
 
-                var s_location =  $("select[name=s-location]");
-                s_location.attr('disabled', 'disabled');
+                var text_any = "<?php _e("Any", 'theme_front');?>";
+                var s_location = $("select[name=s-location]");
+                var span_s_location = $("span[id^=select2-s-location-]");
+                span_s_location.text(text_any);
+
                 s_location.empty();
+                s_location.attr('disabled', 'disabled');
 
                 var term_id = $(this).val();
                 var data = {
@@ -48,13 +52,15 @@ function dynamic_location_javascript ()
                 $.post('<?php echo admin_url('admin-ajax.php')?>', data, function (result) {
 
                     if (result === '0') {
-
+                        s_location.empty();
                         $("select[name=s-location]").append('<option value="">Няма Райони</option>');
                         s_location.removeAttr('disabled', 'disabled');
 
                         return false;
 
                     } else {
+                        s_location.empty();
+                        s_location.append('<option value="">' + text_any + '</option>');
                         s_location.append(result);
                         s_location.removeAttr('disabled', 'disabled');
 
@@ -67,9 +73,33 @@ function dynamic_location_javascript ()
 
     </script> <?php
 }
-
-add_action( 'after_setup_theme', 'setup_child_domain' );
-
-function setup_child_domain(){
-    load_theme_textdomain( 'theme_child', get_stylesheet_directory() . '/languages' );
+// Add City in bg_BG.po
+function setup_child_domain ()
+{
+    load_theme_textdomain('theme_child', get_stylesheet_directory() . '/languages');
 }
+add_action('after_setup_theme', 'setup_child_domain');
+
+/* This function extend and add new location filter (City)
+*  /hometown-theme/custom/theme-functions.php
+*/
+function nt_child_property_filter( $query ) {
+
+    if(is_admin()) {
+        return;
+    }
+
+    if(isset($query->query['bypass_filter'])) {
+        return;
+    }
+
+    // City - location
+    if(isset($_REQUEST['ss-location']) && $_REQUEST['ss-location']) {
+        $query->query_vars['tax_query'][] = array(
+            'taxonomy' => 'location',
+            'include_children' => true,
+            'field' => 'term_id',
+            'terms'=> array($_REQUEST['ss-location']), 'operator' => 'IN');
+    }
+}
+add_action('pre_get_posts', 'nt_child_property_filter');
