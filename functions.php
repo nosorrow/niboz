@@ -26,71 +26,71 @@ function dynamic_location ()
     die;
 
 }
+
 // Set Ajax JS in Footer
 function dynamic_location_javascript ()
 { ?>
     <script type="text/javascript">
         (function ($) {
 
-            function setSelected() {
-                // if have selected
-                if(selectedId){
-                    var selectedOpt = $("option[value=" + selectedId + "]");
-                    selectedOpt.attr('selected', 'selected');
-                    span_s_location.text(selectedOpt[0].text);
+            $(document).ready(function () {
 
-                } else {
-                    span_s_location.text(text_any);
+                function dynamicSelect(a) {
+
+                    var text_any = "<?php _e("Any", 'theme_front');?>";
+                    var s_location = $("select[name=s-location]");
+
+                    s_location.attr('disabled', 'disabled');
+
+                    var term_id = $(a).val();
+                    var data = {
+                        term_id: term_id,
+                        action: 'dynamic_location'
+                    };
+
+                    $.post('<?php echo admin_url('admin-ajax.php')?>', data, function (result) {
+                        if (result === '0') {
+                            s_location.empty();
+                            $("select[name=s-location]").append('<option value="">Няма Райони</option>');
+                            $("span[id^=select2-s-location-]").text(text_any);
+
+                            s_location.removeAttr('disabled', 'disabled');
+
+                            return false;
+
+                        } else {
+
+                            s_location.empty();
+                            s_location.append('<option value="">' + text_any + '</option>');
+                            s_location.append(result);
+
+                            s_location.removeAttr('disabled', 'disabled');
+
+                        }
+
+                        var selectedId = "<?php echo child_get_request('s-location')?>";
+                        // if have selected
+                        if (selectedId) {
+
+                            var selectedOpt = $("option[value=" + selectedId + "]");
+                            selectedOpt.attr('selected', 'selected');
+                            var locationName = selectedOpt[0].text;
+
+                            $("span[id^=select2-s-location-]").text(locationName);
+
+                        } else {
+
+                            $("span[id^=select2-s-location-]").text(text_any);
+
+                        }
+                    });
 
                 }
-            }
 
-            function dynamicSelect(a) {
+                $("select[name=ss-location]").on('change', function () {
 
-                var text_any = "<?php _e("Any", 'theme_front');?>";
-                var s_location = $("select[name=s-location]");
-                var span_s_location = $("span[id^=select2-s-location-]");
-
-                s_location.attr('disabled', 'disabled');
-
-                var term_id = $(a).val();
-                var data = {
-                    term_id: term_id,
-                    action: 'dynamic_location'
-                };
-
-                $.post('<?php echo admin_url('admin-ajax.php')?>', data, function (result) {
-
-                    if (result === '0') {
-                        s_location.empty();
-                        $("select[name=s-location]").append('<option value="">Няма Райони</option>');
-                        span_s_location.text(text_any);
-
-                        s_location.removeAttr('disabled', 'disabled');
-
-                        return false;
-
-                    } else {
-
-                        s_location.empty();
-                        s_location.append('<option value="">' + text_any + '</option>');
-                        s_location.append(result);
-
-                        s_location.removeAttr('disabled', 'disabled');
-
-                    }
-
+                    dynamicSelect(this);
                 });
-
-            }
-
-
-            $("select[name=ss-location]").on('change', function () {
-
-                dynamicSelect(this);
-            });
-
-            $(document).ready(function(){
 
                 dynamicSelect($("select[name=ss-location]"));
 
@@ -100,6 +100,7 @@ function dynamic_location_javascript ()
 
     </script> <?php
 }
+
 add_action('wp_footer', 'dynamic_location_javascript');
 
 
@@ -108,34 +109,38 @@ function setup_child_domain ()
 {
     load_theme_textdomain('theme_child', get_stylesheet_directory() . '/languages');
 }
+
 add_action('after_setup_theme', 'setup_child_domain');
 
 /*
  * This function extend and add new location filter (City)
  * /hometown-theme/custom/theme-functions.php
 */
-function nt_child_property_filter( $query ) {
+function nt_child_property_filter ($query)
+{
 
-    if(is_admin()) {
+    if (is_admin()) {
         return;
     }
 
-    if(isset($query->query['bypass_filter'])) {
+    if (isset($query->query['bypass_filter'])) {
         return;
     }
 
     // City - location
-    if(isset($_REQUEST['ss-location']) && $_REQUEST['ss-location']) {
+    if (isset($_REQUEST['ss-location']) && $_REQUEST['ss-location']) {
         $query->query_vars['tax_query'][] = array(
             'taxonomy' => 'location',
             'include_children' => true,
             'field' => 'term_id',
-            'terms'=> array($_REQUEST['ss-location']), 'operator' => 'IN');
+            'terms' => array($_REQUEST['ss-location']), 'operator' => 'IN');
     }
 }
+
 add_action('pre_get_posts', 'nt_child_property_filter');
 
 // Get Request Parameter
-function child_get_request($key) {
-    return (isset($_REQUEST[$key]))?$_REQUEST[$key]:'';
+function child_get_request ($key)
+{
+    return (isset($_REQUEST[$key])) ? $_REQUEST[$key] : '';
 }
