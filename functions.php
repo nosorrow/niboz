@@ -35,14 +35,11 @@ function dynamic_location_javascript ()
 
             $(document).ready(function () {
 
+
                 function dynamicSelect(a) {
 
                     var text_any = "<?php _e("Any", 'theme_front');?>";
                     var s_location = $("select[name=s-location]");
-
-                    s_location.attr('disabled', 'disabled');
-                //    $("select[name=s-location]").append('<option value><span class="loading"></span></option>');
-                    $("span[role=presentation]").addClass("loading");
 
                     var term_id = $(a).val();
                     var data = {
@@ -50,50 +47,64 @@ function dynamic_location_javascript ()
                         action: 'dynamic_location'
                     };
 
-                    $.post('<?php echo admin_url('admin-ajax.php')?>', data, function (result) {
-                        if (result === '0') {
-                            s_location.empty();
-                            $("select[name=s-location]").append('<option value="">Няма Райони</option>');
-                            $("span[id^=select2-s-location-]").text(text_any);
-
-                            s_location.removeAttr('disabled', 'disabled');
-
-                            return false;
-
-                        } else {
-
-                            s_location.empty();
-                            s_location.append('<option value="">' + text_any + '</option>');
-                            s_location.append(result);
-
-                            s_location.removeAttr('disabled', 'disabled');
-
+                    $.ajax({
+                        url: '<?php echo admin_url('admin-ajax.php')?>',
+                        method: 'POST',
+                        data: data,
+                        global: true,
+                        beforeSend: function () {
+                            s_location.attr('disabled', 'disabled');
+                            $("span[id^=select2-s-location-]").text('.').addClass('loading')
                         }
+                    }).done(
+                        function (result) {
+                            if (result === '0') {
+                                s_location.empty();
+                                $("select[name=s-location]").append('<option value="">Няма Райони</option>');
+                                $("span[id^=select2-s-location-]").text(text_any).removeClass('loading');
 
-                        var selectedId = "<?php echo child_get_request('s-location')?>";
-                        // if have selected
-                        if (selectedId) {
+                                s_location.removeAttr('disabled', 'disabled');
 
-                            var selectedOpt = $("option[value=" + selectedId + "]");
-                            selectedOpt.attr('selected', 'selected');
-                            var locationName = selectedOpt[0].text;
+                                return false;
 
-                            $("span[id^=select2-s-location-]").text(locationName).attr("title", locationName);
+                            } else {
 
-                        } else {
+                                s_location.empty();
+                                s_location.append('<option value="">' + text_any + '</option>');
+                                s_location.append(result);
 
-                            $("span[id^=select2-s-location-]").text(text_any);
+                                s_location.removeAttr('disabled', 'disabled');
 
-                        }
+                            }
+
+                            var selectedId = "<?php echo child_get_request('s-location')?>";
+                            // if have selected
+                            if (selectedId) {
+
+                                var selectedOpt = $("option[value=" + selectedId + "]");
+                                selectedOpt.attr('selected', 'selected');
+                                var locationName = selectedOpt[0].text;
+
+                                $("span[id^=select2-s-location-]").text(locationName).attr("title", locationName).removeClass('loading');
+
+                            } else {
+
+                                $("span[id^=select2-s-location-]").text(text_any).removeClass('loading');
+
+                            }
+                        }).fail(function () {
+                        console.log('%c An unexpected error has occurred-in dynamicSelect()', 'background: red; color: #fff; ' +
+                            'fon-size:12px');
+
                     });
-
                 }
 
+                // =====
                 $("select[name=ss-location]").on('change', function () {
 
                     dynamicSelect(this);
                 });
-
+                // ======
                 dynamicSelect($("select[name=ss-location]"));
 
             });
@@ -121,38 +132,38 @@ add_action('after_setup_theme', 'setup_child_domain');
 function nt_child_property_filter ($query)
 {
 
-    if(is_admin()) {
+    if (is_admin()) {
         return;
     }
 
-    if(isset($query->query['bypass_filter'])) {
+    if (isset($query->query['bypass_filter'])) {
         return;
     }
 
     // Sorting
-    if( ($query->is_tax(array('location','status','type')) || $query->is_post_type_archive('property')) || (is_page() && isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'property') ) {
+    if (($query->is_tax(array('location', 'status', 'type')) || $query->is_post_type_archive('property')) || (is_page() && isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'property')) {
 
         $sort = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : nt_get_option('property', 'default_sorting', '');
         $_REQUEST['sort'] = $sort;
-        if($sort) {
-            if($sort == 'price-desc') {
+        if ($sort) {
+            if ($sort == 'price-desc') {
                 $query->query_vars['orderby'] = 'meta_value_num';
                 $query->query_vars['order'] = 'desc';
                 $query->query_vars['meta_key'] = '_meta_price';
-            } else if($sort == 'price-asc') {
+            } else if ($sort == 'price-asc') {
                 $query->query_vars['orderby'] = 'meta_value_num';
                 $query->query_vars['order'] = 'asc';
                 $query->query_vars['meta_key'] = '_meta_price';
-            } else if($sort == 'date-asc') {
+            } else if ($sort == 'date-asc') {
                 $query->query_vars['orderby'] = 'date';
                 $query->query_vars['order'] = 'asc';
-            } else if($sort == 'date-desc') {
+            } else if ($sort == 'date-desc') {
                 $query->query_vars['orderby'] = 'date';
                 $query->query_vars['order'] = 'desc';
-            } else if($sort == 'name-asc') {
+            } else if ($sort == 'name-asc') {
                 $query->query_vars['orderby'] = 'title';
                 $query->query_vars['order'] = 'asc';
-            } else if($sort == 'name-desc') {
+            } else if ($sort == 'name-desc') {
                 $query->query_vars['orderby'] = 'title';
                 $query->query_vars['order'] = 'desc';
             }
@@ -161,40 +172,37 @@ function nt_child_property_filter ($query)
     }
 
 
-
-
-    if(isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'property') {
+    if (isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'property') {
 
         // WPML
         $query->query_vars['suppress_filters'] = 0;
 
         // Property per Page
-        if(!is_admin() && !isset($query->query_vars['posts_per_page']) ){
+        if (!is_admin() && !isset($query->query_vars['posts_per_page'])) {
             $query->query_vars['posts_per_page'] = nt_get_option('property', 'per_page', get_option('posts_per_page'));
         }
 
 
-
         // ID
-        if(isset($_REQUEST['property-id']) && $_REQUEST['property-id']) {
+        if (isset($_REQUEST['property-id']) && $_REQUEST['property-id']) {
             $query->query_vars['meta_query'][] = array('key' => '_meta_id', 'value' => $_REQUEST['property-id'], 'compare' => 'LIKE');
         }
 
         // Bedroom
-        if(isset($_REQUEST['min-bed']) && $_REQUEST['min-bed']) {
+        if (isset($_REQUEST['min-bed']) && $_REQUEST['min-bed']) {
             $query->query_vars['meta_query'][] = array('key' => '_meta_bedroom', 'value' => $_REQUEST['min-bed'], 'compare' => '>=', 'type' => 'NUMERIC');
         }
 
         // Bathroom
-        if(isset($_REQUEST['min-bath']) && $_REQUEST['min-bath']) {
+        if (isset($_REQUEST['min-bath']) && $_REQUEST['min-bath']) {
             $query->query_vars['meta_query'][] = array('key' => '_meta_bathroom', 'value' => $_REQUEST['min-bath'], 'compare' => '>=', 'type' => 'NUMERIC');
         }
 
         // Price
-        if(isset($_REQUEST['l-price']) && isset($_REQUEST['u-price'])) {
+        if (isset($_REQUEST['l-price']) && isset($_REQUEST['u-price'])) {
             $prices = get_meta_values('_meta_price', 'property');
-            foreach($prices as $key => $price) {
-                if( ($price >= $_REQUEST['l-price'] && $price <= $_REQUEST['u-price']) || $price == '0' ) {
+            foreach ($prices as $key => $price) {
+                if (($price >= $_REQUEST['l-price'] && $price <= $_REQUEST['u-price']) || $price == '0') {
                     unset($prices[$key]);
                 }
             }
@@ -203,10 +211,10 @@ function nt_child_property_filter ($query)
         }
 
         // Area
-        if(isset($_REQUEST['l-area']) && isset($_REQUEST['u-area'])) {
+        if (isset($_REQUEST['l-area']) && isset($_REQUEST['u-area'])) {
             $areas = get_meta_values('_meta_area', 'property');
-            foreach($areas as $key => $area) {
-                if( ($area >= $_REQUEST['l-area'] && $area <= $_REQUEST['u-area']) || $area == '0' ) {
+            foreach ($areas as $key => $area) {
+                if (($area >= $_REQUEST['l-area'] && $area <= $_REQUEST['u-area']) || $area == '0') {
                     unset($areas[$key]);
                 }
             }
@@ -225,15 +233,15 @@ function nt_child_property_filter ($query)
         }
 
         // Location
-        if(isset($_REQUEST['s-location']) && $_REQUEST['s-location']) {
+        if (isset($_REQUEST['s-location']) && $_REQUEST['s-location']) {
             $query->query_vars['tax_query'][] = array('taxonomy' => 'location', 'include_children' => true, 'field' => 'term_id', 'terms' => array($_REQUEST['s-location']), 'operator' => 'IN');
         }
         // Status
-        if(isset($_REQUEST['s-status']) && $_REQUEST['s-status']) {
+        if (isset($_REQUEST['s-status']) && $_REQUEST['s-status']) {
             $query->query_vars['tax_query'][] = array('taxonomy' => 'status', 'include_children' => true, 'field' => 'term_id', 'terms' => array($_REQUEST['s-status']), 'operator' => 'IN');
         }
         // Type
-        if(isset($_REQUEST['s-type']) && $_REQUEST['s-type']) {
+        if (isset($_REQUEST['s-type']) && $_REQUEST['s-type']) {
             $query->query_vars['tax_query'][] = array('taxonomy' => 'type', 'include_children' => true, 'field' => 'term_id', 'terms' => array($_REQUEST['s-type']), 'operator' => 'IN');
         }
 
