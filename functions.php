@@ -113,27 +113,131 @@ function setup_child_domain ()
 add_action('after_setup_theme', 'setup_child_domain');
 
 /*
- * This function extend and add new location filter (City)
+ * This function overwrite and add new location filter (City)
  * /hometown-theme/custom/theme-functions.php
 */
 function nt_child_property_filter ($query)
 {
 
-    if (is_admin()) {
+    if(is_admin()) {
         return;
     }
 
-    if (isset($query->query['bypass_filter'])) {
+    if(isset($query->query['bypass_filter'])) {
         return;
     }
 
-    // City - location
-    if (isset($_REQUEST['ss-location']) && $_REQUEST['ss-location']) {
-        $query->query_vars['tax_query'][] = array(
-            'taxonomy' => 'location',
-            'include_children' => true,
-            'field' => 'term_id',
-            'terms' => array($_REQUEST['ss-location']), 'operator' => 'IN');
+    // Sorting
+    if( ($query->is_tax(array('location','status','type')) || $query->is_post_type_archive('property')) || (is_page() && isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'property') ) {
+
+        $sort = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : nt_get_option('property', 'default_sorting', '');
+        $_REQUEST['sort'] = $sort;
+        if($sort) {
+            if($sort == 'price-desc') {
+                $query->query_vars['orderby'] = 'meta_value_num';
+                $query->query_vars['order'] = 'desc';
+                $query->query_vars['meta_key'] = '_meta_price';
+            } else if($sort == 'price-asc') {
+                $query->query_vars['orderby'] = 'meta_value_num';
+                $query->query_vars['order'] = 'asc';
+                $query->query_vars['meta_key'] = '_meta_price';
+            } else if($sort == 'date-asc') {
+                $query->query_vars['orderby'] = 'date';
+                $query->query_vars['order'] = 'asc';
+            } else if($sort == 'date-desc') {
+                $query->query_vars['orderby'] = 'date';
+                $query->query_vars['order'] = 'desc';
+            } else if($sort == 'name-asc') {
+                $query->query_vars['orderby'] = 'title';
+                $query->query_vars['order'] = 'asc';
+            } else if($sort == 'name-desc') {
+                $query->query_vars['orderby'] = 'title';
+                $query->query_vars['order'] = 'desc';
+            }
+        }
+
+    }
+
+
+
+
+    if(isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'property') {
+
+        // WPML
+        $query->query_vars['suppress_filters'] = 0;
+
+        // Property per Page
+        if(!is_admin() && !isset($query->query_vars['posts_per_page']) ){
+            $query->query_vars['posts_per_page'] = nt_get_option('property', 'per_page', get_option('posts_per_page'));
+        }
+
+
+
+        // ID
+        if(isset($_REQUEST['property-id']) && $_REQUEST['property-id']) {
+            $query->query_vars['meta_query'][] = array('key' => '_meta_id', 'value' => $_REQUEST['property-id'], 'compare' => 'LIKE');
+        }
+
+        // Bedroom
+        if(isset($_REQUEST['min-bed']) && $_REQUEST['min-bed']) {
+            $query->query_vars['meta_query'][] = array('key' => '_meta_bedroom', 'value' => $_REQUEST['min-bed'], 'compare' => '>=', 'type' => 'NUMERIC');
+        }
+
+        // Bathroom
+        if(isset($_REQUEST['min-bath']) && $_REQUEST['min-bath']) {
+            $query->query_vars['meta_query'][] = array('key' => '_meta_bathroom', 'value' => $_REQUEST['min-bath'], 'compare' => '>=', 'type' => 'NUMERIC');
+        }
+
+        // Price
+        if(isset($_REQUEST['l-price']) && isset($_REQUEST['u-price'])) {
+            $prices = get_meta_values('_meta_price', 'property');
+            foreach($prices as $key => $price) {
+                if( ($price >= $_REQUEST['l-price'] && $price <= $_REQUEST['u-price']) || $price == '0' ) {
+                    unset($prices[$key]);
+                }
+            }
+
+            $query->query_vars['meta_query'][] = array('key' => '_meta_price', 'value' => $prices, 'compare' => 'NOT IN');
+        }
+
+        // Area
+        if(isset($_REQUEST['l-area']) && isset($_REQUEST['u-area'])) {
+            $areas = get_meta_values('_meta_area', 'property');
+            foreach($areas as $key => $area) {
+                if( ($area >= $_REQUEST['l-area'] && $area <= $_REQUEST['u-area']) || $area == '0' ) {
+                    unset($areas[$key]);
+                }
+            }
+            $query->query_vars['meta_query'][] = array('key' => '_meta_area', 'value' => $areas, 'compare' => 'NOT IN', 'type' => 'NUMERIC');
+        }
+
+        $query->query_vars['tax_query']['relation'] = 'AND';
+
+        // City - location
+        if (isset($_REQUEST['ss-location']) && $_REQUEST['ss-location']) {
+            $query->query_vars['tax_query'][] = array(
+                'taxonomy' => 'location',
+                'include_children' => true,
+                'field' => 'term_id',
+                'terms' => array($_REQUEST['ss-location']), 'operator' => 'IN');
+        }
+
+        // Location
+        if(isset($_REQUEST['s-location']) && $_REQUEST['s-location']) {
+            $query->query_vars['tax_query'][] = array('taxonomy' => 'location', 'include_children' => true, 'field' => 'term_id', 'terms' => array($_REQUEST['s-location']), 'operator' => 'IN');
+        }
+        // Status
+        if(isset($_REQUEST['s-status']) && $_REQUEST['s-status']) {
+            $query->query_vars['tax_query'][] = array('taxonomy' => 'status', 'include_children' => true, 'field' => 'term_id', 'terms' => array($_REQUEST['s-status']), 'operator' => 'IN');
+        }
+        // Type
+        if(isset($_REQUEST['s-type']) && $_REQUEST['s-type']) {
+            $query->query_vars['tax_query'][] = array('taxonomy' => 'type', 'include_children' => true, 'field' => 'term_id', 'terms' => array($_REQUEST['s-type']), 'operator' => 'IN');
+        }
+
+        // var_dump($query);
+        // die();
+
     }
 }
 
