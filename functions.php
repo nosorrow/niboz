@@ -41,6 +41,8 @@ function dynamic_location_javascript ()
                     var s_location = $("select[name=s-location]");
 
                     s_location.attr('disabled', 'disabled');
+                //    $("select[name=s-location]").append('<option value><span class="loading"></span></option>');
+                    $("span[role=presentation]").addClass("loading");
 
                     var term_id = $(a).val();
                     var data = {
@@ -76,7 +78,7 @@ function dynamic_location_javascript ()
                             selectedOpt.attr('selected', 'selected');
                             var locationName = selectedOpt[0].text;
 
-                            $("span[id^=select2-s-location-]").text(locationName);
+                            $("span[id^=select2-s-location-]").text(locationName).attr("title", locationName);
 
                         } else {
 
