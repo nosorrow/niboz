@@ -9,13 +9,3 @@ Text Domain: theme_child
 */
 
 /* ------- Insert custom styles below this line ------- */
-
-.loading {
-    background-color: #fff;
-    background-image: url("img/15.gif");
-    background-size: 120px 18px;
-    background-position:center center;
-    background-repeat: no-repeat;
-    color: #fff !important;
-
-}

@@ -62,23 +62,8 @@ function property_search_form ($search_layout, $widget = false)
                     foreach ($terms_sorted as $term):
                         ?>
                         <option value="<?php echo esc_attr($term->term_id); ?>" <?php if (nt_get_request('ss-location') ==
-                            $term->term_id) echo 'selected="selected"'; ?>><?php echo $term->name; ?></option>
-                        <?php /*foreach($term->children as $term_child): */
-                        ?><!--
-                <option value="<?php /*echo esc_attr($term_child->term_id); */
-                        ?>" <?php /*if(nt_get_request('s-location') == $term_child->term_id) echo 'selected="selected"'; */
-                        ?>>- <?php /*echo $term_child->name; */
-                        ?></option>
-                <?php /*foreach($term_child->children as $term_3child): */
-                        ?>
-                    <option value="<?php /*echo esc_attr($term_3child->term_id); */
-                        ?>" <?php /*if(nt_get_request('s-location') == $term_3child->term_id) echo 'selected="selected"'; */
-                        ?>>-- <?php /*echo $term_3child->name; */
-                        ?></option>
-                <?php /*endforeach; */
-                        ?>
-            --><?php /*endforeach; */
-                        ?>
+                            $term->term_id) echo 'selected="selected"'; ?>><?php echo $term->name; ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -87,22 +72,6 @@ function property_search_form ($search_layout, $widget = false)
                 <label><?php _e('Property Location', 'theme_front'); ?></label>
                 <select class="select2" name="s-location" tabindex="2">
                     <option value=""><?php _e('Any', 'theme_front'); ?></option>
-                    <?php
-/*                    $terms = get_terms('location', array('orderby' => 'name', 'hide_empty' => 1));
-                    $terms_sorted = array();
-                    nt_sort_terms_hierarchicaly($terms, $terms_sorted);
-                    foreach ($terms_sorted as $term):
-                        */?><!--
-                        <option value="<?php /*echo esc_attr($term->term_id); */?>" <?php /*if (nt_get_request('s-location') == $term->term_id) echo 'selected="selected"'; */?>><?php /*echo $term->name; */?></option>
-                        <?php /*foreach ($term->children as $term_child): */?>
-                        <option value="<?php /*echo esc_attr($term_child->term_id); */?>" <?php /*if (nt_get_request('s-location') == $term_child->term_id) echo 'selected="selected"'; */?>>
-                            - <?php /*echo $term_child->name; */?></option>
-                        <?php /*foreach ($term_child->children as $term_3child): */?>
-                            <option value="<?php /*echo esc_attr($term_3child->term_id); */?>" <?php /*if (nt_get_request('s-location') == $term_3child->term_id) echo 'selected="selected"'; */?>>
-                                -- <?php /*echo $term_3child->name; */?></option>
-                        <?php /*endforeach; */?>
-                    <?php /*endforeach; */?>
-                    --><?php /*endforeach; */?>
                 </select>
             </div>
             <div class="columns large-3 medium-4 small-6 search-status">
@@ -168,19 +137,6 @@ function property_search_form ($search_layout, $widget = false)
                     <input type="text" name="property-id" placeholder="<?php _e('Any', 'theme_front'); ?>"
                            value="<?php echo esc_attr(nt_get_request('property-id')); ?>" autofocus tabindex="1"/>
                 </div>
-                <!--<div class="columns large-2 medium-4 small-6 search-bath">
-                    <label><?php /*_e('Baths', 'theme_child'); */?></label>
-                    <select class="select2" name="min-bath" data-minimum-results-for-search="Infinity" tabindex="6">
-                        <option value=""><?php /*_e('Any', 'theme_front'); */?></option>
-                        <?php
-/*                        $meta = $meta_bathroom;
-                        $max = floor(max($meta));
-                        for ($i = 1; $i <= $max; $i++):
-                            */?>
-                            <option value="<?php /*echo esc_attr($i); */?>" <?php /*if (nt_get_request('min-bath') == $i) echo 'selected="selected"'; */?>><?php /*echo $i; */?></option>
-                        <?php /*endfor; */?>
-                    </select>
-                </div>-->
             <?php endif; ?>
 
             <?php if ($search_layout != 'compact' && $meta_price): ?>
