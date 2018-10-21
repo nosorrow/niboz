@@ -169,8 +169,8 @@ class DynamicLocation
         <style>
             .loading {
                 background-color: rgba(255, 255, 255, 0.8);
-                background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/15.gif");
-                background-size: 100px 15px;
+                background-image: url("<?php echo get_stylesheet_directory_uri();?>/img/1.gif");
+                background-size: 16px 11px;
                 background-position: center center;
                 background-repeat: no-repeat;
                 color: #fff !important;
