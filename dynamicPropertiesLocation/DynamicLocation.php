@@ -101,7 +101,7 @@ class DynamicLocation
                             global: true,
                             beforeSend: function () {
                                 s_location.attr('disabled', 'disabled');
-                                $("span[id^=select2-s-location-]").text('.').addClass('loading')
+                                $("span[id^=select2-s-location-]").text('.').addClass('loading');
                             }
                         }).done(
                             function (result) {
@@ -136,7 +136,7 @@ class DynamicLocation
 
                                 } else {
 
-                                    $("span[id^=select2-s-location-]").text(text_any).removeClass('loading');
+                                    $("span[id^=select2-s-location-]").text(text_any).attr("title", text_any).removeClass('loading');
 
                                 }
                             }).fail(function () {
