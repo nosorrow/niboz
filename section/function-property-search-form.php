@@ -132,7 +132,7 @@ function property_search_form ($search_layout, $widget = false)
             <?php endif; ?>
 
             <?php if ($search_layout != 'compact' && !$widget): ?>
-                <div class="columns large-2 medium-4 search-id">
+                <div class="columns large-2 medium-4 small-6 search-id">
                     <label><?php _e('Property ID', 'theme_front'); ?></label>
                     <input type="text" name="property-id" placeholder="<?php _e('Any', 'theme_front'); ?>"
                            value="<?php echo esc_attr(nt_get_request('property-id')); ?>" autofocus tabindex="1"/>
