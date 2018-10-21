@@ -108,7 +108,7 @@ class DynamicLocation
                                 if (result === '0') {
                                     s_location.empty();
                                     $("select[name=s-location]").append('<option value="">Няма Райони</option>');
-                                    $("span[id^=select2-s-location-]").text(text_any).removeClass('loading');
+                                    $("span[id^=select2-s-location-]").text(text_any).attr("title", text_any).removeClass('loading');
 
                                     s_location.removeAttr('disabled', 'disabled');
 
