@@ -9,6 +9,7 @@ function setup_child_domain ()
 {
     load_theme_textdomain('theme_child', get_stylesheet_directory() . '/languages');
 }
+
 /*
  * Load DynamicLocation
  */

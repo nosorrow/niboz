@@ -117,7 +117,7 @@ function property_search_form ($search_layout, $widget = false)
 
             <?php if ($search_layout != 'compact' && !$widget): ?>
                 <div class="columns large-2 medium-4 small-6 search-bed">
-                    <label><?php _e('Min Beds', 'theme_child'); ?></label>
+                    <label><?php _e('Min Beds', 'theme_front'); ?></label>
                     <select class="select2" name="min-bed" data-minimum-results-for-search="Infinity" tabindex="5">
                         <option value=""><?php _e('Any', 'theme_front'); ?></option>
                         <?php
