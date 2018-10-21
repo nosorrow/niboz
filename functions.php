@@ -9,7 +9,9 @@ function setup_child_domain ()
 {
     load_theme_textdomain('theme_child', get_stylesheet_directory() . '/languages');
 }
-
+/*
+ * Load DynamicLocation
+ */
 if (file_exists(get_stylesheet_directory().'/dynamicPropertiesLocation/DynamicLocation.php')){
     include_once "dynamicPropertiesLocation/DynamicLocation.php";
 
