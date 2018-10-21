@@ -21,6 +21,9 @@ class DynamicLocation
 
     }
 
+    /**
+     *  Running DynamicLocation on function.php
+     */
     public function run()
     {
         /*
@@ -42,7 +45,7 @@ class DynamicLocation
         add_action('pre_get_posts', [$this, 'nt_child_property_filter']);
     }
 
-    /*
+    /**
      * Create Ajax response
      */
     public function dynamic_location()
@@ -70,7 +73,7 @@ class DynamicLocation
         die;
     }
 
-    /*
+    /**
     * Set Ajax JavaScript in Footer
     */
     public function dynamic_location_javascript()
@@ -158,6 +161,9 @@ class DynamicLocation
         </script> <?php
     }
 
+    /**
+     * Set css in header
+     */
     public function setCssStyle()
     { ?>
         <style>
@@ -175,6 +181,10 @@ class DynamicLocation
         <?php
     }
 
+    /**
+    * This function overwrite and add new location filter (City)
+    * original function /hometown-theme/custom/theme-functions.php
+    */
     public function nt_child_property_filter($query)
     {
 
@@ -297,7 +307,11 @@ class DynamicLocation
         }
     }
 
-    // Get Request Parameter
+    /**
+     * Get Request Parameter
+     * @param $key
+     * @return string
+     */
     public function child_get_request($key)
     {
         return (isset($_REQUEST[$key])) ? $_REQUEST[$key] : '';
